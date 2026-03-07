@@ -21,7 +21,7 @@
     #f5576c
   );
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 45s ease infinite;
 }
 
 /* Smooth gradient color shift animation */
@@ -49,7 +49,7 @@
     radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
     radial-gradient(ellipse at 40% 40%, rgba(0, 0, 0, 0.1) 0%, transparent 40%);
-  animation: overlayMove 20s ease-in-out infinite;
+  animation: overlayMove 60s ease-in-out infinite;
 }
 
 @keyframes overlayMove {
@@ -84,7 +84,7 @@
   top: -200px;
   left: -200px;
   animation-delay: 0s;
-  animation-duration: 25s;
+  animation-duration: 50s;
 }
 
 .blob-2 {
@@ -94,7 +94,7 @@
   top: 50%;
   right: -150px;
   animation-delay: -5s;
-  animation-duration: 30s;
+  animation-duration: 60s;
 }
 
 .blob-3 {
@@ -104,7 +104,7 @@
   bottom: -100px;
   left: 30%;
   animation-delay: -10s;
-  animation-duration: 22s;
+  animation-duration: 55s;
 }
 
 @keyframes float {
@@ -206,4 +206,41 @@
   50% {
     transform: scale(1.05);
   }
+}
+
+/* Override dark mode styles for login page */
+[data-theme="dark"] .login-background,
+[data-theme="light"] .login-background,
+.login-background {
+  background: linear-gradient(
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #23d5ab,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #f5576c
+  ) !important;
+  background-size: 400% 400% !important;
+}
+
+[data-theme="dark"] .login-card,
+[data-theme="light"] .login-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .login-card .form-control,
+[data-theme="light"] .login-card .form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .login-card .form-control:focus,
+[data-theme="light"] .login-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
