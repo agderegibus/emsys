@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(python -m alembic:*)",
+      "Bash(/mnt/c/Users/aggonzalez/Desktop/empanadas-system/backend/venv/Scripts/python.exe -m alembic:*)",
+      "Bash(/mnt/c/Users/aggonzalez/Desktop/empanadas-system/backend/venv/Scripts/python.exe check_db.py)",
+      "Bash(curl:*)",
+      "Bash(python -m json.tool:*)",
+      "Bash(./venv/Scripts/python.exe -m alembic revision:*)",
+      "Bash(./venv/Scripts/python.exe -m alembic upgrade:*)",
+      "Bash(./venv/Scripts/python.exe:*)"
+    ]
+  }
+}

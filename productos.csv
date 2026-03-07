@@ -1,0 +1,223 @@
+category,subcategory,name,variant,price_ars,description,is_active
+Promociones,Promociones,"3 Empanadas + lata de gaseosa","",5700,"",true
+Promociones,Promociones,"Promo App de la Semana","",18500,"Promo 4x3: 3 empanadas de cada variedad a elección. Debe seleccionar 4 gustos. Sabores: Carne, Jamón y Queso, Verdura, Pollo, Humita, Muzzarella y Cebolla, Atún, Kaprese.",true
+Promociones,Promo cajitas,"Cajita de 6 Empanadas con Salsita + Lata de Stella Artois","",11800,"",true
+Promociones,Promo norteña,"Promo norteña","",19300,"6 empanadas tucumanas + 6 empanadas salteñas con salsa de limón y salsa picante",true
+Promociones,Promo cajitas,"Cajita Salteña","",10500,"6 empanadas salteñas + salsa picante",true
+Promociones,Promo cajitas,"Cajita tucumana","",10500,"6 empanadas tucumanas + salsa de limón",true
+Promociones,Promo cajitas,"Cajita criolla","",10500,"6 empanadas de res braseada + salsita de morrones ahumados",true
+Promociones,Promociones,"12 Empanadas + 1 Pepsi o Quilmes","",24000,"Empanadas de Carne o Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 1 Pepsi o Quilmes","8 porciones",14800,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes.",true
+Promociones,Promociones,"Pizza Muzzarella + 1 Pepsi o Quilmes","12 porciones",17200,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes.",true
+Promociones,Promociones,"Pizza Muzzarella + 4 Empanadas","8 porciones",17500,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes - Empanadas: Carne o Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 4 Empanadas","12 porciones",19800,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes - Empanadas: Carne o Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 6 Empanadas + 1 Pepsi o Quilmes","8 porciones",24900,"Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas - Empanadas de: Carne, Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 6 Empanadas + 1 Pepsi o Quilmes","12 porciones",27200,"Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas - Empanadas de: Carne, Jamón y Queso.",true
+Promociones,Promociones,"Pizza Especial + 6 Empanadas + 1 Pepsi o Quilmes","8 porciones",27400,"Pizza Especial con: salsa de tomate, muzzarella, jamón, morrones, aceitunas y huevo - Empanadas de: Carne, Jamón y Queso.",true
+Promociones,Promociones,"Pizza Especial + 6 Empanadas + 1 Pepsi o Quilmes","12 porciones",31000,"Pizza Especial con: salsa de tomate, muzzarella, jamón, morrones, aceitunas y huevo - Empanadas de: Carne, Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 12 Empanadas","8 porciones",31000,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes - Empanadas: Carne o Jamón y Queso.",true
+Promociones,Promociones,"Pizza Muzzarella + 12 Empanadas","12 porciones",33200,"Pizza Muzzarella con: Salsa de tomate, muzzarella, aceitunas verdes - Empanadas: Carne o Jamón y Queso.",true
+Promociones,Promociones,"2 Pizzas Muzzarella","8 porciones",21600,"Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas.",true
+Promociones,Promociones,"2 Pizzas Muzzarella","12 porciones",26300,"Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas.",true
+Promociones,Promociones,"Pizza Muzzarella + Pizza Especial","8 porciones",24200,"Pizza Especial con: salsa de tomate, muzzarella, jamón, morrones, aceitunas y huevo. Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas.",true
+Promociones,Promociones,"Pizza Muzzarella + Pizza Especial","12 porciones",30000,"Pizza Especial con: salsa de tomate, muzzarella, jamón, morrones, aceitunas y huevo. Pizza Muzzarella con: salsa de tomate, muzzarella y aceitunas.",true
+Promociones,Promociones,"12 Empanadas + 12 Triples","",40500,"Empanadas: Carne o Jamón y Queso - Triples: Jamón, Queso, Lechuga y Tomate.",true
+Promociones,Promociones,"12 Triples + 1 Pepsi o Quilmes","",24800,"Triples: Jamón, Queso, Lechuga y Tomate.",true
+Promociones,Promociones,"Franui","",8000,"Frambuesas bañadas en chocolate",true
+Pack Lunch,Pack Lunch,"48 Simples de Jamón y Queso","",20000,"Simples: 24 de Jamón - 24 de Queso.",true
+Pack Lunch,Pack Lunch,"48 Simples Surtidos","",20000,"12 Jamón - 12 Queso - 6 Choclo - 6 Roquefort - 6 Huevos y aceitunas - 6 Huevo y tomate.",true
+Pack Lunch,Pack Lunch,"36 Triples Surtidos","",28000,"12 Jamón cocido y queso - 6 jamón cocido y roquefort - 6 Jamón cocido y choclo - 6 Jamón cocido, queso, lechuga y tomate - 6 Jamón cocido, queso, huevo y aceitunas.",true
+Pack Lunch,Pack Lunch,"36 Triples Especiales","",30000,"6 Jamón cocido y queso - 6 jamón crudo y queso - 6 Jamón cocido y roquefort - 6 Jamón cocido, huevo y tomate - 6 Pavita, huevo y morrón - 6 Pavita, queso y tomate.",true
+Pack Lunch,Pack Lunch,"36 Triples La Orden","",32000,"6 Jamón cocido y ananá - 6 jamón cocido y roquefort - 6 Jamón crudo y queso - 6 Jamón crudo, palmito y cereza - 6 Peceto, huevo y morrón - 6 Peceto, huevo y tomate.",true
+Pack Lunch,Pack Lunch,"24 Triples veggies","",24000,"6 de Queso, Choclo, y Queso Crema - 6 de Huevo, Morrón, Queso y Aceitunas - 6 de Rúcula, Parmesano, Huevo y Queso - 6 de Palmitos, Salsa Golf y Queso",true
+Promos Single,Promos Single,"3 Empanadas + Gaseosa","",6200,"Elegís 3 empanadas de carne, jamón y queso, pollo o verdura + gaseosa 1/2 litro.",true
+Promos Single,Promos Single,"Triple + Gaseosa","",6200,"Incluye 4 triples con una gaseosa de medio litro a elección.",true
+Promos Single,Promos Single,"Pizzeta + Gaseosa","",5800,"Elegís: Muzzarella, Muzzarella con Jamón o Napolitana + gaseosa 1/2 litro.",true
+Promos Single,Promos Single,"Ensalada + Gaseosa","",6700,"Ensalada a elección + gaseosa 1/2 litro.",true
+Empanadas,Empanadas,"Empanada de Carne","",1850,"Pulpa picada, cebolla, aceituna, huevo duro, pimentón y ají molido.",true
+Empanadas,Empanadas,"Empanada de Jamón y Queso","",1850,"Muzzarella y jamón cocido.",true
+Empanadas,Empanadas,"Empanada de Verdura","",1850,"Espinaca, cebolla, muzzarella, pimienta negra, nuez moscada.",true
+Empanadas,Empanadas,"Empanada de Pollo","",1850,"Blanco de pollo, cebolla, morrones, muzzarella, ají molido y pimienta negra.",true
+Empanadas,Empanadas,"Empanada de Humita","",1850,"Salsa blanca, cebolla, nuez moscada, choclo crema y choclo grano amarillo.",true
+Empanadas,Empanadas,"Empanada de Muzzarella y Cebolla","",1850,"Cebolla, muzzarella y ají molido.",true
+Empanadas,Empanadas,"Empanada de Atún","",1850,"Atún, cebolla, morrones y muzzarella.",true
+Empanadas,Empanadas,"Empanada de Kaprese","",1850,"Tomate, muzzarella y albahaca.",true
+Empanadas,Empanadas,"Empanada de Tropical Ananá","",2000,"Muzzarella, jamón cocido y ananá en trozos.",true
+Empanadas,Empanadas,"Empanada de Roquefort, Jamón y Nuez","",2000,"Roquefort, muzzarella, jamón cocido y nueces.",true
+Empanadas,Empanadas,"Empanada de Carne Trozada","",2000,"Pulpa especial, cebolla, verdeo, aceitunas negras, huevo, ají molido, pimentón y comino.",true
+Empanadas,Empanadas,"Empanada de Calabresa","",2000,"Cantimpalo, muzzarella, ají molido y pimentón.",true
+Empanadas,Empanadas,"Empanada de Ciruela y Panceta","",2000,"Panceta salada, muzzarella y ciruela.",true
+Empanadas,Empanadas,"Empanada Burger","",2000,"Carne, cheddar, cebolla caramelizada y bacon.",true
+Empanadas,Empanadas,"Empanada de Mariscos","",2500,"Camarones, mejillones pelados, cebolla, tomate cubeteado, ajo, ají molido y pimentón.",true
+Empanadas,Empanadas,"Empanada de Vegetales Grillados","",2000,"Vegetales asados, salsa bechamel, masa con semillas.",true
+Empanadas,Empanadas,"Empanada de Bondiola y Provolone","",2000,"Bondiola braseada, cebolla caramelizada, provolone.",true
+Promociones,Promo cajitas,"Cajita Salteña","",10500,"6 empanadas salteñas + salsa picante",true
+Pizzas 8 porciones,Clasicas,"Muzzarella 8p.","entera",12000,"Pizza a la parrilla 8 porciones: salsa de tomate, muzzarella, aceitunas verdes.",true
+Pizzas 8 porciones,Clasicas,"Muzzarella 8p.","media",6000,"Pizza a la parrilla 8 porciones: salsa de tomate, muzzarella, aceitunas verdes.",true
+Pizzas 8 porciones,Clasicas,"Muzzarella Doble 8p.","entera",13600,"Salsa de tomate, doble muzzarella, doble aceitunas.",true
+Pizzas 8 porciones,Clasicas,"Muzzarella Doble 8p.","media",6800,"Salsa de tomate, doble muzzarella, doble aceitunas.",true
+Pizzas 8 porciones,Clasicas,"Fugazzeta 8p.","entera",13600,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 8 porciones,Clasicas,"Fugazzeta 8p.","media",6800,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 8 porciones,Clasicas,"Napolitana 8p.","entera",13600,"Salsa de tomate, muzzarella, rodajas de tomate, ajo.",true
+Pizzas 8 porciones,Clasicas,"Napolitana 8p.","media",6800,"Salsa de tomate, muzzarella, rodajas de tomate, ajo.",true
+Pizzas 8 porciones,Clasicas,"Napolitana Especial 8p.","entera",14800,"Salsa de tomate, muzzarella, jamón, rodajas de tomate, ajo.",true
+Pizzas 8 porciones,Clasicas,"Napolitana Especial 8p.","media",7400,"Salsa de tomate, muzzarella, jamón, rodajas de tomate, ajo.",true
+Pizzas 8 porciones,Clasicas,"Muzzarella con Jamón 8p.","entera",13600,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes.",true
+Pizzas 8 porciones,Clasicas,"Muzzarella con Jamón 8p.","media",6800,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes.",true
+Pizzas 8 porciones,Clasicas,"Especial 8p.","entera",14800,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes, huevo.",true
+Pizzas 8 porciones,Clasicas,"Especial 8p.","media",7400,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes, huevo.",true
+Pizzas 8 porciones,Clasicas,"Pollo 8p.","entera",16000,"Salsa de tomate, muzzarella, pollo, morrones, huevo.",true
+Pizzas 8 porciones,Clasicas,"Pollo 8p.","media",8000,"Salsa de tomate, muzzarella, pollo, morrones, huevo.",true
+Pizzas 8 porciones,Clasicas,"Roquefort 8p.","entera",16000,"Salsa de tomate, muzzarella, queso azul.",true
+Pizzas 8 porciones,Clasicas,"Roquefort 8p.","media",8000,"Salsa de tomate, muzzarella, queso azul.",true
+Pizzas 8 porciones,Clasicas,"Provoleta 8p.","entera",16000,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 8 porciones,Clasicas,"Provoleta 8p.","media",8000,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 8 porciones,Clasicas,"Anchoas 8p.","entera",16000,"Salsa de tomate, muzzarella, anchoas.",true
+Pizzas 8 porciones,Clasicas,"Anchoas 8p.","media",8000,"Salsa de tomate, muzzarella, anchoas.",true
+Pizzas 8 porciones,Clasicas,"Margarita 8p.","entera",16000,"Salsa de tomate, muzzarella, tomate en cubos, albahaca, aceitunas negras, oliva.",true
+Pizzas 8 porciones,Clasicas,"Margarita 8p.","media",8000,"Salsa de tomate, muzzarella, tomate en cubos, albahaca, aceitunas negras, oliva.",true
+Pizzas 8 porciones,Sabores,"4 Quesos 8p.","entera",16800,"Salsa de tomate, muzzarella, roquefort, provolone y parmesano.",true
+Pizzas 8 porciones,Sabores,"4 Quesos 8p.","media",8400,"Salsa de tomate, muzzarella, roquefort, provolone y parmesano.",true
+Pizzas 8 porciones,Sabores,"Calabresa 8p.","entera",16800,"Salsa de tomate, muzzarella, longaniza en rodajas, aceitunas negras.",true
+Pizzas 8 porciones,Sabores,"Calabresa 8p.","media",8400,"Salsa de tomate, muzzarella, longaniza en rodajas, aceitunas negras.",true
+Pizzas 8 porciones,Sabores,"Panceta 8p.","entera",18000,"Salsa de tomate, muzzarella, panceta salada, parmesano en hebras, aceitunas negras.",true
+Pizzas 8 porciones,Sabores,"Panceta 8p.","media",9000,"Salsa de tomate, muzzarella, panceta salada, parmesano en hebras, aceitunas negras.",true
+Pizzas 8 porciones,Sabores,"Rúcula 8p.","entera",18800,"Salsa de tomate, muzzarella, jamón crudo, rúcula, parmesano en hebras, oliva.",true
+Pizzas 8 porciones,Sabores,"Rúcula 8p.","media",9400,"Salsa de tomate, muzzarella, jamón crudo, rúcula, parmesano en hebras, oliva.",true
+Pizzas 8 porciones,Sabores,"Agridulce 8p.","entera",18800,"Salsa de tomate, muzzarella, jamón en tiras, ananá, cerezas.",true
+Pizzas 8 porciones,Sabores,"Agridulce 8p.","media",9400,"Salsa de tomate, muzzarella, jamón en tiras, ananá, cerezas.",true
+Pizzas 8 porciones,Sabores,"Palmitos 8p.","entera",18800,"Salsa de tomate, muzzarella, jamón crudo, palmitos, salsa golf.",true
+Pizzas 8 porciones,Sabores,"Palmitos 8p.","media",9400,"Salsa de tomate, muzzarella, jamón crudo, palmitos, salsa golf.",true
+Pizzas 8 porciones,Sabores,"Champignon 8p.","entera",18800,"Salsa de tomate, muzzarella, crema de champignon, parmesano en hebras.",true
+Pizzas 8 porciones,Sabores,"Champignon 8p.","media",9400,"Salsa de tomate, muzzarella, crema de champignon, parmesano en hebras.",true
+Pizzas 8 porciones,Sabores,"Fugazzeta Especial 8p.","entera",19600,"Salsa de tomate, muzzarella, cebolla, roquefort y anchoas.",true
+Pizzas 8 porciones,Sabores,"Fugazzeta Especial 8p.","media",9800,"Salsa de tomate, muzzarella, cebolla, roquefort y anchoas.",true
+Pizzas 8 porciones,Sabores,"Pollo a la Crema de Verdeo 8p.","entera",19600,"Salsa de tomate, muzzarella, pollo, cebolla de verdeo, crema, huevo.",true
+Pizzas 8 porciones,Sabores,"Pollo a la Crema de Verdeo 8p.","media",9800,"Salsa de tomate, muzzarella, pollo, cebolla de verdeo, crema, huevo.",true
+Pizzas 8 porciones,Sabores,"Provoleta con Anchoas 8p.","entera",19600,"Salsa de tomate, muzzarella, provolone y anchoas.",true
+Pizzas 8 porciones,Sabores,"Provoleta con Anchoas 8p.","media",9800,"Salsa de tomate, muzzarella, provolone y anchoas.",true
+Pizzas 8 porciones,Sabores,"Mariscos 8p.","entera",24000,"Salsa de tomate, muzzarella, mejillones y camarones con salsa, ají molido.",true
+Pizzas 8 porciones,Sabores,"Mariscos 8p.","media",12000,"Salsa de tomate, muzzarella, mejillones y camarones con salsa, ají molido.",true
+Pizzas 8 porciones,Sabores,"Sabores de LO 8p.","entera",20400,"Salsa de tomate, muzzarella, queso azul, pollo, morrones, nueces.",true
+Pizzas 8 porciones,Sabores,"Sabores de LO 8p.","media",10200,"Salsa de tomate, muzzarella, queso azul, pollo, morrones, nueces.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella 12p.","entera",14600,"Salsa de tomate, muzzarella, aceitunas verdes.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella 12p.","media",7300,"Salsa de tomate, muzzarella, aceitunas verdes.",true
+Pizzas 12 porciones,Clasicas,"Especial 12p.","entera",18800,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes, huevo.",true
+Pizzas 12 porciones,Clasicas,"Especial 12p.","media",9400,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes, huevo.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella Doble 12p.","entera",17600,"Salsa de tomate, doble muzzarella, doble aceitunas.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella Doble 12p.","media",8800,"Salsa de tomate, doble muzzarella, doble aceitunas.",true
+Pizzas 12 porciones,Clasicas,"Fugazzeta 12p.","entera",17600,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 12 porciones,Clasicas,"Fugazzeta 12p.","media",8800,"Salsa de tomate, muzzarella, cebolla, aceitunas negras.",true
+Pizzas 12 porciones,Clasicas,"Napolitana 12p.","entera",17600,"Salsa de tomate, muzzarella, rodajas de tomate, ajo.",true
+Pizzas 12 porciones,Clasicas,"Napolitana 12p.","media",8800,"Salsa de tomate, muzzarella, rodajas de tomate, ajo.",true
+Pizzas 12 porciones,Clasicas,"Napolitana Especial 12p.","entera",18800,"Salsa de tomate, muzzarella, jamón, rodajas de tomate, ajo.",true
+Pizzas 12 porciones,Clasicas,"Napolitana Especial 12p.","media",9400,"Salsa de tomate, muzzarella, jamón, rodajas de tomate, ajo.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella con Jamón 12p.","entera",16400,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes.",true
+Pizzas 12 porciones,Clasicas,"Muzzarella con Jamón 12p.","media",8800,"Salsa de tomate, muzzarella, jamón en tiras, morrones, aceitunas verdes.",true
+Pizzas 12 porciones,Clasicas,"Pollo 12p.","entera",19600,"Salsa de tomate, muzzarella, pollo, morrones, huevo.",true
+Pizzas 12 porciones,Clasicas,"Pollo 12p.","media",9800,"Salsa de tomate, muzzarella, pollo, morrones, huevo.",true
+Pizzas 12 porciones,Clasicas,"Roquefort 12p.","entera",19600,"Salsa de tomate, muzzarella, queso azul.",true
+Pizzas 12 porciones,Clasicas,"Roquefort 12p.","media",9800,"Salsa de tomate, muzzarella, queso azul.",true
+Pizzas 12 porciones,Clasicas,"Provoleta 12p.","entera",19600,"Salsa de tomate, muzzarella, queso provolone.",true
+Pizzas 12 porciones,Clasicas,"Provoleta 12p.","media",9800,"Salsa de tomate, muzzarella, queso provolone.",true
+Pizzas 12 porciones,Clasicas,"Anchoas 12p.","entera",19600,"Salsa de tomate, muzzarella, anchoas.",true
+Pizzas 12 porciones,Clasicas,"Anchoas 12p.","media",9800,"Salsa de tomate, muzzarella, anchoas.",true
+Pizzas 12 porciones,Clasicas,"Margarita 12p.","entera",19600,"Salsa de tomate, muzzarella, tomate en cubos, albahaca, aceitunas negras, oliva.",true
+Pizzas 12 porciones,Clasicas,"Margarita 12p.","media",9800,"Salsa de tomate, muzzarella, tomate en cubos, albahaca, aceitunas negras, oliva.",true
+Pizzas 12 porciones,Sabores,"4 Quesos 12p.","entera",20400,"Salsa de tomate, muzzarella, roquefort, provolone y parmesano.",true
+Pizzas 12 porciones,Sabores,"4 Quesos 12p.","media",10200,"Salsa de tomate, muzzarella, roquefort, provolone y parmesano.",true
+Pizzas 12 porciones,Sabores,"Calabresa 12p.","entera",20400,"Salsa de tomate, muzzarella, longaniza en rodajas, aceitunas negras.",true
+Pizzas 12 porciones,Sabores,"Calabresa 12p.","media",10200,"Salsa de tomate, muzzarella, longaniza en rodajas, aceitunas negras.",true
+Pizzas 12 porciones,Sabores,"Panceta 12p.","entera",20400,"Salsa de tomate, muzzarella, panceta salada, parmesano en hebras, aceitunas negras.",true
+Pizzas 12 porciones,Sabores,"Panceta 12p.","media",10200,"Salsa de tomate, muzzarella, panceta salada, parmesano en hebras, aceitunas negras.",true
+Pizzas 12 porciones,Sabores,"Rúcula 12p.","entera",21800,"Salsa de tomate, muzzarella, jamón crudo, rúcula, parmesano en hebras, oliva.",true
+Pizzas 12 porciones,Sabores,"Rúcula 12p.","media",10900,"Salsa de tomate, muzzarella, jamón crudo, rúcula, parmesano en hebras, oliva.",true
+Pizzas 12 porciones,Sabores,"Agridulce 12p.","entera",21800,"Salsa de tomate, muzzarella, jamón en tiras, ananá, cerezas.",true
+Pizzas 12 porciones,Sabores,"Agridulce 12p.","media",10900,"Salsa de tomate, muzzarella, jamón en tiras, ananá, cerezas.",true
+Pizzas 12 porciones,Sabores,"Palmitos 12p.","entera",21800,"Salsa de tomate, muzzarella, jamón crudo, palmitos, salsa golf.",true
+Pizzas 12 porciones,Sabores,"Palmitos 12p.","media",10900,"Salsa de tomate, muzzarella, jamón crudo, palmitos, salsa golf.",true
+Pizzas 12 porciones,Sabores,"Champignon 12p.","entera",21800,"Salsa de tomate, muzzarella, crema de champignon, parmesano en hebras.",true
+Pizzas 12 porciones,Sabores,"Champignon 12p.","media",10900,"Salsa de tomate, muzzarella, crema de champignon, parmesano en hebras.",true
+Pizzas 12 porciones,Sabores,"Fugazzeta Especial 12p.","entera",23600,"Salsa de tomate, muzzarella, cebolla, roquefort y anchoas.",true
+Pizzas 12 porciones,Sabores,"Fugazzeta Especial 12p.","media",11800,"Salsa de tomate, muzzarella, cebolla, roquefort y anchoas.",true
+Pizzas 12 porciones,Sabores,"Pollo a la Crema de Verdeo 12p.","entera",23600,"Salsa de tomate, muzzarella, pollo, cebolla de verdeo, crema, huevo.",true
+Pizzas 12 porciones,Sabores,"Pollo a la Crema de Verdeo 12p.","media",11800,"Salsa de tomate, muzzarella, pollo, cebolla de verdeo, crema, huevo.",true
+Pizzas 12 porciones,Sabores,"Provoleta con Anchoas 12p.","entera",23600,"Salsa de tomate, muzzarella, provolone y anchoas.",true
+Pizzas 12 porciones,Sabores,"Provoleta con Anchoas 12p.","media",11800,"Salsa de tomate, muzzarella, provolone y anchoas.",true
+Pizzas 12 porciones,Sabores,"Mariscos 12p.","entera",26000,"Salsa de tomate, muzzarella, mejillones y camarones con salsa, ají molido.",true
+Pizzas 12 porciones,Sabores,"Mariscos 12p.","media",15900,"Salsa de tomate, muzzarella, mejillones y camarones con salsa, ají molido.",true
+Pizzas 12 porciones,Sabores,"Sabores de LO 12p.","entera",28800,"Salsa de tomate, muzzarella, queso azul, pollo, morrones, nueces.",true
+Pizzas 12 porciones,Sabores,"Sabores de LO 12p.","media",14400,"Salsa de tomate, muzzarella, queso azul, pollo, morrones, nueces.",true
+Tartitas,Tartitas,"Tartita de Jamón y Queso","",8800,"",true
+Tartitas,Tartitas,"Tartita de Verdura","",8800,"",true
+Tartitas,Tartitas,"Tartita de Pollo","",8800,"",true
+Tartitas,Tartitas,"Tartita de Choclo","",8800,"",true
+Tartitas,Tartitas,"Tartita Caprese","",8800,"",true
+Tartitas,Tartitas,"Tartita de Queso y Cebolla","",8800,"",true
+Ensaladas,Ensaladas,"Ensalada Caesar","",5800,"lechuga, croutones, pollo, queso parmesano.",true
+Ensaladas,Ensaladas,"Ensalada 3 Sabores","",5800,"lechuga, tomate, pollo y huevo.",true
+Ensaladas,Ensaladas,"Ensalada Kaprese","",5800,"tomate, queso fresco, aceitunas negras y albahaca.",true
+Ensaladas,Ensaladas,"Ensalada Clásica","",5800,"zanahoria rallada, tomate, choclo y huevo.",true
+Ensaladas,Ensaladas,"Ensalada Mediterranea","",5800,"tomates cherry confitados, roquefort, nuez y rúcula.",true
+Ensaladas,Ensaladas,"Ensalada de Palmitos","",5800,"lechuga, palmitos, jamón en tiras y aceitunas verdes.",true
+Sandwiches,Simples,"Sándwiches mixtos de jamón crudo y queso","1/2 docena",10000,"",true
+Sandwiches,Simples,"Sándwiches mixtos de jamón crudo y queso","docena",20000,"",true
+Sandwiches,Simples,"Sándwiches de queso","1/2 docena",6000,"",true
+Sandwiches,Simples,"Sándwiches de queso","docena",12000,"",true
+Sandwiches,Simples,"Sándwiches de jamón cocido","1/2 docena",6000,"",true
+Sandwiches,Simples,"Sándwiches de jamón cocido","docena",12000,"",true
+Sandwiches,Simples,"Sándwiches de jamón crudo","1/2 docena",7500,"",true
+Sandwiches,Simples,"Sándwiches de jamón crudo","docena",15000,"",true
+Sandwiches,Simples,"Sándwiches mixtos de jamón cocido y queso","1/2 docena",8500,"",true
+Sandwiches,Simples,"Sándwiches mixtos de jamón cocido y queso","docena",17000,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, queso y manteca","1/2 docena",11500,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, queso y manteca","docena",23000,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, queso, lechuga, tomate y huevo","1/2 docena",11500,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, queso, lechuga, tomate y huevo","docena",23000,"",true
+Sandwiches,Triples,"Sándwiches de anchoas, queso y huevo","1/2 docena",11500,"",true
+Sandwiches,Triples,"Sándwiches de anchoas, queso y huevo","docena",23000,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido y ananá","1/2 docena",12500,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido y ananá","docena",25000,"",true
+Sandwiches,Triples,"Sándwiches de queso, morrón, huevo y aceitunas","1/2 docena",11500,"",true
+Sandwiches,Triples,"Sándwiches de queso, morrón, huevo y aceitunas","docena",23000,"",true
+Sandwiches,Triples,"Sándwiches de apio, queso crema y roquefort","1/2 docena",11500,"",true
+Sandwiches,Triples,"Sándwiches de apio, queso crema y roquefort","docena",23000,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, roquefort y nuez","1/2 docena",12500,"",true
+Sandwiches,Triples,"Sándwiches de jamón cocido, roquefort y nuez","docena",25000,"",true
+Sandwiches,Triples,"Sándwiches de atún, huevo y morrón","1/2 docena",12500,"",true
+Sandwiches,Triples,"Sándwiches de atún, huevo y morrón","docena",25000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, queso y manteca","1/2 docena",13500,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, queso y manteca","docena",27000,"",true
+Sandwiches,Triples,"Sándwiches de rúcula, jamón crudo y parmesano","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de rúcula, jamón crudo y parmesano","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, palmito y cerezas","1/2 docena",14500,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, palmito y cerezas","docena",29000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, palmito y golf","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, palmito y golf","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo y ananá","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo y ananá","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, huevo y morrón","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de jamón crudo, huevo y morrón","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de pavita, jamón cocido y queso","1/2 docena",13500,"",true
+Sandwiches,Triples,"Sándwiches de pavita, jamón cocido y queso","docena",27000,"",true
+Sandwiches,Triples,"Sándwiches de pavita, palmito, salsa golf y morrón","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de pavita, palmito, salsa golf y morrón","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de pavita, queso, tomate y huevo","1/2 docena",13500,"",true
+Sandwiches,Triples,"Sándwiches de pavita, queso, tomate y huevo","docena",27000,"",true
+Sandwiches,Triples,"Sándwiches de peceto, lechuga, tomate y huevo","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de peceto, lechuga, tomate y huevo","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de peceto, huevo y morrón","1/2 docena",14000,"",true
+Sandwiches,Triples,"Sándwiches de peceto, huevo y morrón","docena",28000,"",true
+Sandwiches,Triples,"Sándwiches de peceto, Vitel Toné","1/2 docena",14500,"crema de anchoas, aceitunas negras",true
+Sandwiches,Triples,"Sándwiches de peceto, Vitel Toné","docena",29000,"crema de anchoas, aceitunas negras",true
+Bebidas,Bebidas,"Agua mineral","1/2 litro",1700,"Eco de Los Andes",true
+Bebidas,Bebidas,"Agua mineral","1.5 litro",3500,"Eco de Los Andes",true
+Bebidas,Bebidas,"Gaseosas","lata",1500,"todas las gaseosas",true
+Bebidas,Bebidas,"Gaseosas","1.5 litro",4500,"todas las gaseosas",true
+Bebidas,Bebidas,"Quilmes 473cc","lata",2800,"",true
+Bebidas,Bebidas,"Stella Artois 473cc","lata",3500,"",true
+Bebidas,Bebidas,"Andes rubia 473cc","lata",3200,"",true
+Bebidas,Bebidas,"Andes roja 473cc","lata",3200,"",true
+Bebidas,Bebidas,"Patagonia amber larger 473cc","lata",3700,"",true
+Bebidas,Bebidas,"Patagonia 24,7 473cc","lata",3700,"",true
+Bebidas,Bebidas,"Corona 330cc","botella/lata 330cc",3700,"",true
