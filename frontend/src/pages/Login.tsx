@@ -3,11 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/login-background.css';
 
+// Generate random dark/saturated colors
+const generateRandomColors = () => {
+  const colors = [];
+  for (let i = 0; i < 6; i++) {
+    const hue = Math.floor(Math.random() * 360);
+    const saturation = 60 + Math.floor(Math.random() * 30); // 60-90%
+    const lightness = 20 + Math.floor(Math.random() * 25); // 20-45% (dark)
+    colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
+  }
+  return colors;
+};
+
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [gradientColors, setGradientColors] = useState<string[]>(generateRandomColors());
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -17,6 +30,14 @@ export default function Login() {
     return () => {
       document.body.classList.remove('login-page');
     };
+  }, []);
+
+  // Change colors periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGradientColors(generateRandomColors());
+    }, 30000); // Change every 30 seconds
+    return () => clearInterval(interval);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,10 +55,15 @@ export default function Login() {
     }
   };
 
+  const backgroundStyle = {
+    background: `linear-gradient(-45deg, ${gradientColors.join(', ')})`,
+    backgroundSize: '400% 400%',
+  };
+
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center position-relative">
       {/* Animated background */}
-      <div className="login-background">
+      <div className="login-background" style={backgroundStyle}>
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="blob blob-3"></div>
