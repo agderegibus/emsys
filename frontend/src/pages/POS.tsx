@@ -3,6 +3,7 @@ import { toast } from "sonner"
 import type { Product } from "@/types/product"
 import { listProducts } from "@/lib/products"
 import { apiGet, apiPost } from "@/lib/api"
+import { useBranch } from "@/contexts/BranchContext"
 
 type Customer = {
   id: number
@@ -48,6 +49,7 @@ function formatARS(value: number) {
 }
 
 export default function POS() {
+  const { currentBranch } = useBranch()
   const [products, setProducts] = useState<Product[]>([])
   const [loadingProducts, setLoadingProducts] = useState(true)
   const [q, setQ] = useState("")
@@ -86,19 +88,21 @@ export default function POS() {
   const [deliveryPersons, setDeliveryPersons] = useState<{ id: number; name: string }[]>([])
   const [assigningDelivery, setAssigningDelivery] = useState(false)
 
+  // Reload products when branch changes
   useEffect(() => {
     setLoadingProducts(true)
     listProducts()
       .then(setProducts)
       .catch(() => toast.error("No se pudieron cargar productos"))
       .finally(() => setLoadingProducts(false))
-  }, [])
+  }, [currentBranch?.id])
 
+  // Reload recent sales, cashiers and delivery persons when branch changes
   useEffect(() => {
     loadRecent()
     loadCashiers()
     loadDeliveryPersons()
-  }, [])
+  }, [currentBranch?.id])
 
   async function loadCashiers() {
     try {

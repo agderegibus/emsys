@@ -9,6 +9,8 @@ from sqlalchemy import func, desc
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.auth import get_current_user, get_branch_context
+from app.models.user import User
 from app.models.customer import Customer
 from app.models.sale import Sale
 from app.schemas.customer import CustomerCreate, CustomerUpdate, CustomerOut, CustomerWithStats
@@ -17,7 +19,11 @@ router = APIRouter(prefix="/customers", tags=["customers"])
 
 
 @router.post("", response_model=CustomerOut)
-def create_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
+def create_customer(
+    customer: CustomerCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     """Create a new customer."""
     db_customer = Customer(**customer.model_dump())
     db.add(db_customer)
@@ -32,6 +38,7 @@ def list_customers(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """List all customers with optional search."""
     query = db.query(Customer)
@@ -54,8 +61,10 @@ def list_customers_with_stats(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+    branch_id: int | None = Depends(get_branch_context),
 ):
-    """List customers with purchase statistics."""
+    """List customers with purchase statistics (filtered by branch)."""
     query = db.query(Customer)
 
     if q:
@@ -70,8 +79,11 @@ def list_customers_with_stats(
 
     result = []
     for customer in customers:
-        # Get purchase statistics
-        sales = db.query(Sale).filter(Sale.customer_id == customer.id).all()
+        # Get purchase statistics (filtered by branch)
+        sales_query = db.query(Sale).filter(Sale.customer_id == customer.id)
+        if branch_id is not None:
+            sales_query = sales_query.filter(Sale.branch_id == branch_id)
+        sales = sales_query.all()
         total_purchases = len(sales)
         total_spent = sum(s.total_ars for s in sales)
         last_purchase_date = max((s.created_at for s in sales), default=None)
@@ -94,7 +106,11 @@ def list_customers_with_stats(
 
 
 @router.get("/{customer_id}", response_model=CustomerOut)
-def get_customer(customer_id: int, db: Session = Depends(get_db)):
+def get_customer(
+    customer_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     """Get a specific customer by ID."""
     customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not customer:
@@ -107,15 +123,19 @@ def get_customer_sales(
     customer_id: int,
     limit: int = Query(10, description="Number of recent sales to return"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+    branch_id: int | None = Depends(get_branch_context),
 ):
-    """Get recent sales for a specific customer."""
+    """Get recent sales for a specific customer (filtered by branch)."""
     customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not customer:
         raise HTTPException(status_code=404, detail="Customer not found")
 
+    sales_query = db.query(Sale).filter(Sale.customer_id == customer_id)
+    if branch_id is not None:
+        sales_query = sales_query.filter(Sale.branch_id == branch_id)
     sales = (
-        db.query(Sale)
-        .filter(Sale.customer_id == customer_id)
+        sales_query
         .order_by(desc(Sale.created_at))
         .limit(limit)
         .all()
@@ -143,6 +163,7 @@ def update_customer(
     customer_id: int,
     customer_update: CustomerUpdate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Update a customer's information."""
     db_customer = db.query(Customer).filter(Customer.id == customer_id).first()
@@ -159,7 +180,11 @@ def update_customer(
 
 
 @router.delete("/{customer_id}")
-def delete_customer(customer_id: int, db: Session = Depends(get_db)):
+def delete_customer(
+    customer_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     """Delete a customer."""
     db_customer = db.query(Customer).filter(Customer.id == customer_id).first()
     if not db_customer:

@@ -3,6 +3,7 @@ import { toast } from "sonner"
 import { apiGet } from "@/lib/api"
 import { listProducts } from "@/lib/products"
 import { createStockMovement, listStockMovements, getStockLevels, getRepositionNeeds } from "@/lib/stock"
+import { useBranch } from "@/contexts/BranchContext"
 import type { Product } from "@/types/product"
 import type { StockMovement, ProductStock, ProductReposition } from "@/types/stock"
 
@@ -30,6 +31,7 @@ function formatDateTime(date: string) {
 }
 
 export default function Stock() {
+  const { currentBranch } = useBranch()
   const [products, setProducts] = useState<Product[]>([])
   const [suppliers, setSuppliers] = useState<Supplier[]>([])
   const [movements, setMovements] = useState<StockMovement[]>([])
@@ -48,9 +50,10 @@ export default function Stock() {
     purchase_price_ars: "",
   })
 
+  // Reload data when branch changes
   useEffect(() => {
     loadData()
-  }, [])
+  }, [currentBranch?.id])
 
   async function loadData() {
     setLoading(true)

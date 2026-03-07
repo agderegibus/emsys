@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { apiGet, apiPost } from "@/lib/api"
+import { useBranch } from "@/contexts/BranchContext"
 
 type Customer = {
   id: number
@@ -41,6 +42,7 @@ function formatARS(value: number) {
 }
 
 export default function Clientes() {
+  const { currentBranch } = useBranch()
   const [customers, setCustomers] = useState<CustomerWithStats[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
@@ -59,9 +61,10 @@ export default function Clientes() {
     address: "",
   })
 
+  // Reload customers when branch or search query changes
   useEffect(() => {
     loadCustomers()
-  }, [searchQuery])
+  }, [searchQuery, currentBranch?.id])
 
   async function loadCustomers() {
     setLoading(true)

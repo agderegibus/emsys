@@ -1,13 +1,11 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
+from fastapi import Depends
 
-DATABASE_URL = (
-    "postgresql+psycopg2://"
-    "empanadas_user:empanadas_pass"
-    "@localhost:5433/empanadas_db"
-)
+from app.core.config import settings
 
-engine = create_engine(DATABASE_URL, echo=True)
+
+engine = create_engine(settings.DATABASE_URL, echo=True)
 
 SessionLocal = sessionmaker(
     autocommit=False,
@@ -16,10 +14,6 @@ SessionLocal = sessionmaker(
 )
 
 Base = declarative_base()
-
-
-from sqlalchemy.orm import Session
-from fastapi import Depends
 
 
 def get_db():

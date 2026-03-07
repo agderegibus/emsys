@@ -8,6 +8,8 @@ from sqlalchemy import func, desc
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.auth import require_admin, get_branch_context
+from app.models.user import User
 from app.models.supplier import Supplier
 from app.models.stock_movement import StockMovement
 from app.schemas.supplier import SupplierCreate, SupplierUpdate, SupplierOut, SupplierWithStats
@@ -16,7 +18,11 @@ router = APIRouter(prefix="/suppliers", tags=["suppliers"])
 
 
 @router.post("", response_model=SupplierOut)
-def create_supplier(supplier: SupplierCreate, db: Session = Depends(get_db)):
+def create_supplier(
+    supplier: SupplierCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
     """Create a new supplier."""
     db_supplier = Supplier(**supplier.model_dump())
     db.add(db_supplier)
@@ -31,6 +37,7 @@ def list_suppliers(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
 ):
     """List all suppliers with optional search."""
     query = db.query(Supplier)
@@ -51,8 +58,10 @@ def list_suppliers_with_stats(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
-    """List suppliers with purchase statistics."""
+    """List suppliers with purchase statistics (filtered by branch)."""
     query = db.query(Supplier)
 
     if q:
@@ -65,15 +74,17 @@ def list_suppliers_with_stats(
 
     result = []
     for supplier in suppliers:
-        # Get purchase statistics from stock movements
-        movements = (
+        # Get purchase statistics from stock movements (filtered by branch)
+        mov_query = (
             db.query(StockMovement)
             .filter(
                 StockMovement.supplier_id == supplier.id,
                 StockMovement.movement_type == "entrada"
             )
-            .all()
         )
+        if branch_id is not None:
+            mov_query = mov_query.filter(StockMovement.branch_id == branch_id)
+        movements = mov_query.all()
 
         total_purchases = len(movements)
         total_spent = sum(
@@ -103,7 +114,11 @@ def list_suppliers_with_stats(
 
 
 @router.get("/{supplier_id}", response_model=SupplierOut)
-def get_supplier(supplier_id: int, db: Session = Depends(get_db)):
+def get_supplier(
+    supplier_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
     """Get a specific supplier by ID."""
     supplier = db.query(Supplier).filter(Supplier.id == supplier_id).first()
     if not supplier:
@@ -116,18 +131,25 @@ def get_supplier_purchases(
     supplier_id: int,
     limit: int = Query(50, description="Number of recent purchases to return"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
-    """Get recent purchases from a specific supplier."""
+    """Get recent purchases from a specific supplier (filtered by branch)."""
     supplier = db.query(Supplier).filter(Supplier.id == supplier_id).first()
     if not supplier:
         raise HTTPException(status_code=404, detail="Supplier not found")
 
-    movements = (
+    mov_query = (
         db.query(StockMovement)
         .filter(
             StockMovement.supplier_id == supplier_id,
             StockMovement.movement_type == "entrada"
         )
+    )
+    if branch_id is not None:
+        mov_query = mov_query.filter(StockMovement.branch_id == branch_id)
+    movements = (
+        mov_query
         .order_by(desc(StockMovement.created_at))
         .limit(limit)
         .all()
@@ -164,6 +186,7 @@ def update_supplier(
     supplier_id: int,
     supplier_update: SupplierUpdate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
 ):
     """Update a supplier's information."""
     db_supplier = db.query(Supplier).filter(Supplier.id == supplier_id).first()
@@ -180,7 +203,11 @@ def update_supplier(
 
 
 @router.delete("/{supplier_id}")
-def delete_supplier(supplier_id: int, db: Session = Depends(get_db)):
+def delete_supplier(
+    supplier_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
     """Delete a supplier."""
     db_supplier = db.query(Supplier).filter(Supplier.id == supplier_id).first()
     if not db_supplier:
