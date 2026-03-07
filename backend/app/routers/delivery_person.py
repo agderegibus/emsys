@@ -5,6 +5,8 @@ from typing import List
 from datetime import datetime, timedelta
 
 from app.core.database import get_db
+from app.core.auth import require_admin, get_branch_context
+from app.models.user import User
 from app.models.delivery_person import DeliveryPerson
 from app.models.sale import Sale
 from app.schemas.delivery_person import DeliveryPersonCreate, DeliveryPersonOut
@@ -15,14 +17,18 @@ router = APIRouter(prefix="/delivery-persons", tags=["delivery-persons"])
 @router.get("/", response_model=List[DeliveryPersonOut])
 def list_delivery_persons(
     db: Session = Depends(get_db),
-    active_only: bool = True
+    active_only: bool = True,
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
-    List all delivery persons (cadetes).
+    List all delivery persons (cadetes) for the current branch.
     """
     query = db.query(DeliveryPerson)
     if active_only:
         query = query.filter(DeliveryPerson.is_active == True)
+    if branch_id is not None:
+        query = query.filter(DeliveryPerson.branch_id == branch_id)
 
     return query.all()
 
@@ -31,15 +37,18 @@ def list_delivery_persons(
 def get_delivery_person_deliveries(
     delivery_person_id: int,
     db: Session = Depends(get_db),
-    date: str | None = None  # Format: YYYY-MM-DD
+    date: str | None = None,  # Format: YYYY-MM-DD
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get all deliveries assigned to a specific delivery person.
     Optionally filter by date.
     """
-    delivery_person = db.query(DeliveryPerson).filter(
-        DeliveryPerson.id == delivery_person_id
-    ).first()
+    dp_query = db.query(DeliveryPerson).filter(DeliveryPerson.id == delivery_person_id)
+    if branch_id is not None:
+        dp_query = dp_query.filter(DeliveryPerson.branch_id == branch_id)
+    delivery_person = dp_query.first()
 
     if not delivery_person:
         raise HTTPException(status_code=404, detail="Cadete no encontrado")
@@ -48,6 +57,8 @@ def get_delivery_person_deliveries(
         Sale.delivery_person_id == delivery_person_id,
         Sale.is_delivery == True
     )
+    if branch_id is not None:
+        query = query.filter(Sale.branch_id == branch_id)
 
     # Filter by date if provided
     if date:
@@ -81,16 +92,19 @@ def get_delivery_person_deliveries(
 def get_delivery_person_stats(
     delivery_person_id: int,
     db: Session = Depends(get_db),
-    date: str | None = None  # Format: YYYY-MM-DD
+    date: str | None = None,  # Format: YYYY-MM-DD
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get statistics for a delivery person (total deliveries and amounts by payment method).
     Cash amount represents what the delivery person must turn in.
     Defaults to today's stats if no date provided.
     """
-    delivery_person = db.query(DeliveryPerson).filter(
-        DeliveryPerson.id == delivery_person_id
-    ).first()
+    dp_query = db.query(DeliveryPerson).filter(DeliveryPerson.id == delivery_person_id)
+    if branch_id is not None:
+        dp_query = dp_query.filter(DeliveryPerson.branch_id == branch_id)
+    delivery_person = dp_query.first()
 
     if not delivery_person:
         raise HTTPException(status_code=404, detail="Cadete no encontrado")
@@ -107,7 +121,7 @@ def get_delivery_person_stats(
         raise HTTPException(status_code=400, detail="Formato de fecha inválido. Use YYYY-MM-DD")
 
     # Get stats with breakdown by payment method
-    stats = db.query(
+    stats_query = db.query(
         func.count(Sale.id).label("total_deliveries"),
         func.coalesce(func.sum(Sale.total_ars), 0).label("total_amount"),
         func.coalesce(
@@ -127,7 +141,10 @@ def get_delivery_person_stats(
         Sale.is_delivery == True,
         Sale.created_at >= start_of_day,
         Sale.created_at <= end_of_day
-    ).first()
+    )
+    if branch_id is not None:
+        stats_query = stats_query.filter(Sale.branch_id == branch_id)
+    stats = stats_query.first()
 
     return {
         "delivery_person_id": delivery_person_id,
@@ -144,12 +161,19 @@ def get_delivery_person_stats(
 @router.post("/", response_model=DeliveryPersonOut)
 def create_delivery_person(
     payload: DeliveryPersonCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
-    Create a new delivery person (cadete).
+    Create a new delivery person (cadete) for the current branch.
     """
-    delivery_person = DeliveryPerson(**payload.dict())
+    if branch_id is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Branch context required to create delivery person"
+        )
+    delivery_person = DeliveryPerson(**payload.dict(), branch_id=branch_id)
     db.add(delivery_person)
     db.commit()
     db.refresh(delivery_person)

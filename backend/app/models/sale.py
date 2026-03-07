@@ -19,6 +19,13 @@ class Sale(Base):
     payment_method: Mapped[str | None] = mapped_column(String(50), nullable=True, index=True)
     cashier: Mapped[str | None] = mapped_column(String(100), nullable=True, index=True)
 
+    # Branch
+    branch_id: Mapped[int | None] = mapped_column(
+        ForeignKey("branches.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True
+    )
+
     # Delivery fields
     is_delivery: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
     delivery_address: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -31,6 +38,7 @@ class Sale(Base):
     )
     customer: Mapped["Customer"] = relationship("Customer", back_populates="sales")
     delivery_person: Mapped["DeliveryPerson"] = relationship("DeliveryPerson", back_populates="deliveries")
+    branch: Mapped["Branch"] = relationship("Branch", back_populates="sales")
 
 
 class SaleItem(Base):

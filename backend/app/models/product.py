@@ -29,3 +29,8 @@ class Product(Base):
         secondary="product_supplier",
         back_populates="products"
     )
+    branch_stocks: Mapped[list["BranchStock"]] = relationship(
+        "BranchStock",
+        back_populates="product",
+        cascade="all, delete-orphan"
+    )

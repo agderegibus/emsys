@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { apiGet, apiPost } from "@/lib/api"
+import { useBranch } from "@/contexts/BranchContext"
 
 type Supplier = {
   id: number
@@ -45,6 +46,7 @@ function formatARS(value: number) {
 }
 
 export default function Proveedores() {
+  const { currentBranch } = useBranch()
   const [suppliers, setSuppliers] = useState<SupplierWithStats[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
@@ -65,9 +67,10 @@ export default function Proveedores() {
     notes: "",
   })
 
+  // Reload suppliers when branch or search query changes
   useEffect(() => {
     loadSuppliers()
-  }, [searchQuery])
+  }, [searchQuery, currentBranch?.id])
 
   async function loadSuppliers() {
     setLoading(true)

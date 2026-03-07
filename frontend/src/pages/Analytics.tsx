@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { apiGet } from "@/lib/api"
+import { useBranch } from "@/contexts/BranchContext"
 import type { Product } from "@/types/product"
 
 type Sale = {
@@ -101,6 +102,7 @@ function formatPercent(value: number) {
 }
 
 export default function Analytics() {
+  const { currentBranch } = useBranch()
   const [data, setData] = useState<AnalyticsSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [dateRange, setDateRange] = useState<"today" | "yesterday" | "7days" | "30days" | "custom">("today")
@@ -118,15 +120,16 @@ export default function Analytics() {
   const [loadingSales, setLoadingSales] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
 
+  // Reload data when branch or date range changes
   useEffect(() => {
     loadData()
     loadSupplierStats()
     loadCashierStats()
-  }, [dateRange, customStart, customEnd])
+  }, [dateRange, customStart, customEnd, currentBranch?.id])
 
   useEffect(() => {
     loadProducts()
-  }, [])
+  }, [currentBranch?.id])
 
   async function loadData() {
     setLoading(true)

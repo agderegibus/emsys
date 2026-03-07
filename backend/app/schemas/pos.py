@@ -15,6 +15,7 @@ class SaleCreate(BaseModel):
     cashier: Optional[str] = None
     is_delivery: bool = False
     delivery_address: Optional[str] = None
+    branch_id: Optional[int] = None
     items: list[SaleItemCreate]
 
 
@@ -39,6 +40,7 @@ class SaleOut(BaseModel):
     is_delivery: bool = False
     delivery_address: Optional[str] = None
     delivery_person_id: Optional[int] = None
+    branch_id: Optional[int] = None
     items: list[SaleItemOut]
 
     class Config:

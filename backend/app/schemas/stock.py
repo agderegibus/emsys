@@ -12,6 +12,7 @@ class StockMovementCreate(BaseModel):
     sale_id: Optional[int] = None
     supplier_id: Optional[int] = None
     purchase_price_ars: Optional[int] = Field(None, ge=0)
+    branch_id: Optional[int] = None
 
 
 class StockMovementOut(BaseModel):
@@ -26,6 +27,7 @@ class StockMovementOut(BaseModel):
     sale_id: Optional[int] = None
     supplier_id: Optional[int] = None
     purchase_price_ars: Optional[int] = None
+    branch_id: Optional[int] = None
     created_at: datetime
 
     # Joined fields (optional)
@@ -33,6 +35,7 @@ class StockMovementOut(BaseModel):
     product_category: Optional[str] = None
     user_name: Optional[str] = None
     supplier_name: Optional[str] = None
+    branch_name: Optional[str] = None
 
     class Config:
         from_attributes = True

@@ -52,6 +52,14 @@ class StockMovement(Base):
 
     purchase_price_ars: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
+    # Branch
+    branch_id: Mapped[int | None] = mapped_column(
+        Integer,
+        ForeignKey("branches.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True
+    )
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
@@ -61,6 +69,7 @@ class StockMovement(Base):
 
     # Relationships
     supplier: Mapped["Supplier"] = relationship("Supplier", back_populates="stock_movements")
+    branch: Mapped["Branch"] = relationship("Branch", back_populates="stock_movements")
 
     __table_args__ = (
         CheckConstraint("movement_type IN ('entrada', 'salida', 'ajuste')", name="valid_movement_type"),

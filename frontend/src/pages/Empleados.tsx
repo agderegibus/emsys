@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { apiGet } from "@/lib/api"
+import { useBranch } from "@/contexts/BranchContext"
 
 type DeliveryPerson = {
   id: number
@@ -56,6 +57,7 @@ function formatDateTime(date: string) {
 }
 
 export default function Empleados() {
+  const { currentBranch } = useBranch()
   const [activeTab, setActiveTab] = useState<"cadetes" | "cajeros">("cadetes")
   const [deliveryPersons, setDeliveryPersons] = useState<DeliveryPerson[]>([])
   const [deliveryStats, setDeliveryStats] = useState<Map<number, DeliveryPersonStats>>(new Map())
@@ -72,9 +74,10 @@ export default function Empleados() {
 
   const today = new Date().toISOString().split("T")[0]
 
+  // Reload data when branch changes
   useEffect(() => {
     loadData()
-  }, [])
+  }, [currentBranch?.id])
 
   async function loadData() {
     setLoading(true)

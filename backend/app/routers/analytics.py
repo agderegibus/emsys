@@ -11,6 +11,8 @@ from sqlalchemy import func, desc
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.auth import require_admin, get_branch_context
+from app.models.user import User
 from app.models.sale import Sale, SaleItem
 from app.models.product import Product
 from app.models.stock_movement import StockMovement
@@ -24,6 +26,8 @@ def get_analytics_summary(
     start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get analytics summary with key metrics and aggregated data.
@@ -62,18 +66,16 @@ def get_analytics_summary(
     prev_end = start - timedelta(seconds=1)
 
     # Current period sales
-    current_sales = (
-        db.query(Sale)
-        .filter(Sale.created_at >= start, Sale.created_at <= end)
-        .all()
-    )
+    current_query = db.query(Sale).filter(Sale.created_at >= start, Sale.created_at <= end)
+    if branch_id is not None:
+        current_query = current_query.filter(Sale.branch_id == branch_id)
+    current_sales = current_query.all()
 
     # Previous period sales
-    previous_sales = (
-        db.query(Sale)
-        .filter(Sale.created_at >= prev_start, Sale.created_at <= prev_end)
-        .all()
-    )
+    prev_query = db.query(Sale).filter(Sale.created_at >= prev_start, Sale.created_at <= prev_end)
+    if branch_id is not None:
+        prev_query = prev_query.filter(Sale.branch_id == branch_id)
+    previous_sales = prev_query.all()
 
     # Calculate metrics
     total_sales = sum(s.total_ars for s in current_sales)
@@ -90,7 +92,7 @@ def get_analytics_summary(
     avg_ticket_growth = ((avg_ticket - prev_avg_ticket) / prev_avg_ticket * 100) if prev_avg_ticket > 0 else 0
 
     # Top products by quantity
-    top_products_qty = (
+    top_qty_query = (
         db.query(
             Product.id,
             Product.name,
@@ -102,6 +104,11 @@ def get_analytics_summary(
         .join(SaleItem, SaleItem.product_id == Product.id)
         .join(Sale, Sale.id == SaleItem.sale_id)
         .filter(Sale.created_at >= start, Sale.created_at <= end)
+    )
+    if branch_id is not None:
+        top_qty_query = top_qty_query.filter(Sale.branch_id == branch_id)
+    top_products_qty = (
+        top_qty_query
         .group_by(Product.id, Product.name, Product.variant, Product.category)
         .order_by(desc("total_qty"))
         .limit(10)
@@ -109,7 +116,7 @@ def get_analytics_summary(
     )
 
     # Top products by revenue
-    top_products_revenue = (
+    top_rev_query = (
         db.query(
             Product.id,
             Product.name,
@@ -121,6 +128,11 @@ def get_analytics_summary(
         .join(SaleItem, SaleItem.product_id == Product.id)
         .join(Sale, Sale.id == SaleItem.sale_id)
         .filter(Sale.created_at >= start, Sale.created_at <= end)
+    )
+    if branch_id is not None:
+        top_rev_query = top_rev_query.filter(Sale.branch_id == branch_id)
+    top_products_revenue = (
+        top_rev_query
         .group_by(Product.id, Product.name, Product.variant, Product.category)
         .order_by(desc("total_revenue"))
         .limit(10)
@@ -128,7 +140,7 @@ def get_analytics_summary(
     )
 
     # Sales by category
-    sales_by_category = (
+    cat_query = (
         db.query(
             Product.category,
             func.sum(SaleItem.qty).label("total_qty"),
@@ -137,6 +149,11 @@ def get_analytics_summary(
         .join(SaleItem, SaleItem.product_id == Product.id)
         .join(Sale, Sale.id == SaleItem.sale_id)
         .filter(Sale.created_at >= start, Sale.created_at <= end)
+    )
+    if branch_id is not None:
+        cat_query = cat_query.filter(Sale.branch_id == branch_id)
+    sales_by_category = (
+        cat_query
         .group_by(Product.category)
         .order_by(desc("total_revenue"))
         .all()
@@ -242,12 +259,18 @@ def get_filtered_sales(
     product_id: Optional[int] = Query(None, description="Filter by product ID"),
     date: Optional[str] = Query(None, description="Filter by specific date (YYYY-MM-DD)"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get sales filtered by various criteria.
     Returns full sale details including items.
     """
     query = db.query(Sale)
+
+    # Filter by branch
+    if branch_id is not None:
+        query = query.filter(Sale.branch_id == branch_id)
 
     # Date range filter
     if start_date:
@@ -314,6 +337,8 @@ def get_supplier_stats(
     start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get supplier purchase statistics for a given period.
@@ -334,7 +359,7 @@ def get_supplier_stats(
         end = datetime.combine(today, datetime.max.time())
 
     # Query stock movements with suppliers
-    supplier_stats = (
+    supplier_query = (
         db.query(
             Supplier.id.label("supplier_id"),
             Supplier.name.label("supplier_name"),
@@ -348,6 +373,11 @@ def get_supplier_stats(
             StockMovement.movement_type == "entrada",
             StockMovement.purchase_price_ars.isnot(None)
         )
+    )
+    if branch_id is not None:
+        supplier_query = supplier_query.filter(StockMovement.branch_id == branch_id)
+    supplier_stats = (
+        supplier_query
         .group_by(Supplier.id, Supplier.name)
         .order_by(desc("total_spent"))
         .all()
@@ -369,6 +399,8 @@ def get_cashier_stats(
     start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+    branch_id: int | None = Depends(get_branch_context),
 ):
     """
     Get cashier sales statistics for a given period.
@@ -389,15 +421,17 @@ def get_cashier_stats(
         end = datetime.combine(today, datetime.max.time())
 
     # Get all sales with cashiers
-    sales = (
+    cashier_query = (
         db.query(Sale)
         .filter(
             Sale.created_at >= start,
             Sale.created_at <= end,
             Sale.cashier.isnot(None)
         )
-        .all()
     )
+    if branch_id is not None:
+        cashier_query = cashier_query.filter(Sale.branch_id == branch_id)
+    sales = cashier_query.all()
 
     # Group by cashier and calculate stats
     cashier_data = {}
