@@ -30,7 +30,7 @@ export default function Login() {
       <div className="card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="card-body p-5">
           <div className="text-center mb-4">
-            <h1 className="h3 mb-2">Empanadas System</h1>
+            <h1 className="h3 mb-2">Empanada System</h1>
             <p className="text-muted">Ingrese sus credenciales</p>
           </div>
 
