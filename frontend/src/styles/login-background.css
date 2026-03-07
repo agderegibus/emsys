@@ -1,0 +1,180 @@
+/* Animated gradient background for login page */
+.login-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Floating blurred blobs */
+.login-background::before,
+.login-background::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 15s ease-in-out infinite;
+}
+
+.login-background::before {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.login-background::after {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #0f3460 0%, #533483 100%);
+  bottom: -100px;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+/* Additional floating elements */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: float 20s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #e8a838 0%, #f39c12 100%);
+  top: 50%;
+  left: 30%;
+  animation-delay: -3s;
+  animation-duration: 18s;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  top: 20%;
+  right: 20%;
+  animation-delay: -7s;
+  animation-duration: 22s;
+}
+
+.blob-3 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -10s;
+  animation-duration: 25s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(50px, -50px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(100px, 50px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(-50px, 100px) rotate(270deg) scale(1.05);
+  }
+}
+
+/* Login card styling for glass effect */
+.login-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.login-card .card-body {
+  color: #ffffff;
+}
+
+.login-card h1 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.login-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.login-card .form-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.login-card .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.login-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.login-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.login-card .btn-primary {
+  background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+}
+
+.login-card .btn-primary:disabled {
+  background: linear-gradient(135deg, #666 0%, #888 100%);
+  transform: none;
+}
+
+.login-card .alert-danger {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #ff8a8a;
+}
+
+/* Logo animation */
+.login-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
