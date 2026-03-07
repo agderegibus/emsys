@@ -1,3 +1,11 @@
+/* Reset body background when login page is shown */
+body.login-page,
+[data-theme="dark"] body.login-page,
+[data-theme="light"] body.login-page {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 /* Animated gradient background for login page */
 .login-background {
   position: fixed;
@@ -6,7 +14,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
 
   /* Large animated gradient that shifts colors */
   background: linear-gradient(
@@ -124,6 +132,8 @@
 
 /* Login card styling for glass effect */
 .login-card {
+  position: relative;
+  z-index: 10;
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
