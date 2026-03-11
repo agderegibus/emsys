@@ -9,7 +9,9 @@
       "Bash(python -m json.tool:*)",
       "Bash(./venv/Scripts/python.exe -m alembic revision:*)",
       "Bash(./venv/Scripts/python.exe -m alembic upgrade:*)",
-      "Bash(./venv/Scripts/python.exe:*)"
+      "Bash(./venv/Scripts/python.exe:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)"
     ]
   }
 }

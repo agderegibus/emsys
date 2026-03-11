@@ -1,5 +1,17 @@
 # Guía de Deployment - Sistema Empanadas
 
+## Configuración del Servidor (La Orden)
+
+| Servicio | Puerto |
+|----------|--------|
+| Frontend | 9000 |
+| Backend  | 8000 |
+| PostgreSQL | 5432 |
+
+**Directorio base:** `/home/sistema/`
+
+---
+
 ## Requisitos del Servidor
 
 - Python 3.10+
@@ -25,7 +37,7 @@ GRANT ALL PRIVILEGES ON DATABASE empanadas_db TO empanadas_user;
 ### 2.1 Clonar y configurar:
 
 ```bash
-cd /opt/empanadas-system/backend
+cd /home/sistema/empanadas-system/backend
 
 # Crear entorno virtual
 python3 -m venv venv
@@ -38,19 +50,46 @@ pip install -r requirements.txt
 ### 2.2 Crear archivo `.env`:
 
 ```bash
-# backend/.env
-DATABASE_URL=postgresql://empanadas_user:tu_password_seguro@localhost:5432/empanadas_db
-JWT_SECRET_KEY=tu_clave_jwt_super_secreta_de_32_caracteres_minimo
-ADMIN_PASSWORD=password_admin_seguro
+# Copiar el ejemplo
+cp .env.example .env
+
+# Editar con los valores de producción
+nano .env
 ```
 
-### 2.3 Ejecutar setup de base de datos:
+Contenido del `.env`:
+```bash
+# Database (puerto 5432 en el servidor)
+DATABASE_URL=postgresql+psycopg2://empanadas_user:tu_password_seguro@localhost:5432/empanadas_db
+
+# CORS (frontend corre en puerto 9000)
+CORS_ORIGINS=http://localhost:9000,http://127.0.0.1:9000
+
+# JWT - CAMBIAR EN PRODUCCIÓN
+JWT_SECRET_KEY=tu_clave_jwt_super_secreta_de_32_caracteres_minimo
+JWT_ALGORITHM=HS256
+JWT_EXPIRE_MINUTES=480
+
+# Admin inicial
+FIRST_ADMIN_USERNAME=admin
+FIRST_ADMIN_EMAIL=admin@empanadas.com
+FIRST_ADMIN_PASSWORD=password_seguro_aqui
+```
+
+### 2.3 Ejecutar migraciones:
 
 ```bash
-cd /opt/empanadas-system/backend
+cd /home/sistema/empanadas-system/backend
 source venv/bin/activate
 
-# Este comando crea todas las tablas y datos iniciales
+# Aplicar migraciones
+alembic upgrade head
+```
+
+### 2.4 Ejecutar setup de base de datos (opcional):
+
+```bash
+# Este comando crea datos iniciales
 python setup_database.py
 ```
 
@@ -62,7 +101,7 @@ El script `setup_database.py` realiza:
 5. Configura stock inicial para Mendoza
 6. Crea proveedores de ejemplo
 
-### 2.4 Verificar setup:
+### 2.5 Verificar setup:
 
 ```bash
 # Ver resumen de la base de datos
@@ -86,6 +125,8 @@ db.close()
 
 ### Desarrollo:
 ```bash
+cd /home/sistema/empanadas-system/backend
+source venv/bin/activate
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
@@ -96,9 +137,7 @@ pip install gunicorn
 gunicorn app.main:app \
     --workers 4 \
     --worker-class uvicorn.workers.UvicornWorker \
-    --bind 0.0.0.0:8000 \
-    --access-logfile /var/log/empanadas/access.log \
-    --error-logfile /var/log/empanadas/error.log
+    --bind 0.0.0.0:8000
 ```
 
 ### Systemd Service (recomendado):
@@ -112,15 +151,15 @@ After=network.target postgresql.service
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
-WorkingDirectory=/opt/empanadas-system/backend
-Environment="PATH=/opt/empanadas-system/backend/venv/bin"
-EnvironmentFile=/opt/empanadas-system/backend/.env
-ExecStart=/opt/empanadas-system/backend/venv/bin/gunicorn app.main:app \
+User=sistema
+Group=sistema
+WorkingDirectory=/home/sistema/empanadas-system/backend
+Environment="PATH=/home/sistema/empanadas-system/backend/venv/bin"
+EnvironmentFile=/home/sistema/empanadas-system/backend/.env
+ExecStart=/home/sistema/empanadas-system/backend/venv/bin/gunicorn app.main:app \
     --workers 4 \
     --worker-class uvicorn.workers.UvicornWorker \
-    --bind 127.0.0.1:8000
+    --bind 0.0.0.0:8000
 Restart=always
 RestartSec=5
 
@@ -139,88 +178,73 @@ sudo systemctl status empanadas-backend
 
 ## 4. Configuración del Frontend
 
-### 4.1 Build de producción:
+### 4.1 Crear archivo `.env`:
 
 ```bash
-cd /opt/empanadas-system/frontend
+cd /home/sistema/empanadas-system/frontend
+
+# Copiar el ejemplo
+cp .env.example .env
+
+# Editar para producción (backend en puerto 8000)
+echo "VITE_API_URL=http://localhost:8000" > .env
+```
+
+### 4.2 Build de producción:
+
+```bash
+cd /home/sistema/empanadas-system/frontend
 
 # Instalar dependencias
 npm install
-
-# Configurar URL de la API
-echo "VITE_API_URL=https://tu-dominio.com/api" > .env.production
 
 # Build
 npm run build
 ```
 
-### 4.2 Servir con Nginx:
+El build genera la carpeta `dist/` que debe servirse.
 
-El build genera la carpeta `dist/` que debe servirse como archivos estáticos.
+### 4.3 Servir el frontend (desarrollo/testing):
+
+```bash
+# Servir en puerto 9000
+npx serve -s dist -l 9000
+```
 
 ---
 
-## 5. Configuración Nginx (Producción)
+## 5. Actualizar el Sistema (Pull & Build)
 
-Crear `/etc/nginx/sites-available/empanadas`:
-
-```nginx
-server {
-    listen 80;
-    server_name tu-dominio.com;
-
-    # Redirect HTTP to HTTPS
-    return 301 https://$server_name$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    server_name tu-dominio.com;
-
-    # SSL certificates (usar Let's Encrypt)
-    ssl_certificate /etc/letsencrypt/live/tu-dominio.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/tu-dominio.com/privkey.pem;
-
-    # Frontend (React SPA)
-    root /opt/empanadas-system/frontend/dist;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    # Backend API proxy
-    location /api/ {
-        proxy_pass http://127.0.0.1:8000/;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    # Logs
-    access_log /var/log/nginx/empanadas_access.log;
-    error_log /var/log/nginx/empanadas_error.log;
-}
-```
+Cuando hay cambios en el repositorio:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/empanadas /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
+cd /home/sistema/empanadas-system
+
+# Traer cambios
+git pull
+
+# Backend - aplicar migraciones si hay nuevas
+cd backend
+source venv/bin/activate
+alembic upgrade head
+pip install -r requirements.txt  # si hay nuevas dependencias
+
+# Reiniciar backend
+sudo systemctl restart empanadas-backend
+
+# Frontend - rebuild
+cd ../frontend
+npm install  # si hay nuevas dependencias
+npm run build
 ```
 
 ---
 
 ## 6. Comandos Útiles
 
-### Migraciones manuales:
+### Migraciones:
 ```bash
-cd /opt/empanadas-system/backend
+cd /home/sistema/empanadas-system/backend
 source venv/bin/activate
 
 # Ver estado de migraciones
@@ -276,7 +300,7 @@ Después de ejecutar `setup_database.py`:
 | Campo | Valor |
 |-------|-------|
 | Usuario | `admin` |
-| Password | Definido en `ADMIN_PASSWORD` del `.env` (default: `admin123`) |
+| Password | Definido en `FIRST_ADMIN_PASSWORD` del `.env` (default: `admin123`) |
 | Rol | `admin` (acceso total) |
 | Sucursales | Todas (Mendoza, Pergamino, Lagos) |
 
@@ -325,5 +349,11 @@ sudo journalctl -u empanadas-backend -f
 
 ### Verificar que el backend responde:
 ```bash
+curl http://localhost:8000/health
 curl http://localhost:8000/docs
+```
+
+### Verificar puertos en uso:
+```bash
+sudo netstat -tlnp | grep -E "8000|9000|5432"
 ```

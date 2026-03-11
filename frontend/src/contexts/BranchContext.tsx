@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useAuth } from './AuthContext';
+import { API_BASE } from '../config';
 
 interface Branch {
   id: number;
@@ -18,8 +19,6 @@ interface BranchContextType {
 }
 
 const BranchContext = createContext<BranchContextType | undefined>(undefined);
-
-const API_BASE = 'http://127.0.0.1:8000';
 
 export function BranchProvider({ children }: { children: ReactNode }) {
   const { user, token, isAdmin } = useAuth();
