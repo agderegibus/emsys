@@ -1,14 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import '../styles/login-background.css';
+
+// Generate random dark/saturated colors
+const generateRandomColors = () => {
+  const colors = [];
+  for (let i = 0; i < 6; i++) {
+    const hue = Math.floor(Math.random() * 360);
+    const saturation = 60 + Math.floor(Math.random() * 30); // 60-90%
+    const lightness = 20 + Math.floor(Math.random() * 25); // 20-45% (dark)
+    colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
+  }
+  return colors;
+};
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [gradientColors, setGradientColors] = useState<string[]>(generateRandomColors());
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  // Add class to body for login page styling
+  useEffect(() => {
+    document.body.classList.add('login-page');
+    return () => {
+      document.body.classList.remove('login-page');
+    };
+  }, []);
+
+  // Change colors periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGradientColors(generateRandomColors());
+    }, 30000); // Change every 30 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,12 +55,25 @@ export default function Login() {
     }
   };
 
+  const backgroundStyle = {
+    background: `linear-gradient(-45deg, ${gradientColors.join(', ')})`,
+    backgroundSize: '400% 400%',
+  };
+
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-      <div className="card shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
+    <div className="min-vh-100 d-flex align-items-center justify-content-center position-relative">
+      {/* Animated background */}
+      <div className="login-background" style={backgroundStyle}>
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+      </div>
+
+      <div className="card login-card" style={{ maxWidth: '400px', width: '100%', margin: '1rem' }}>
         <div className="card-body p-5">
           <div className="text-center mb-4">
-            <h1 className="h3 mb-2">Empanadas System</h1>
+            <img src="/empanada.svg" alt="Logo" className="login-logo" />
+            <h1 className="h3 mb-2">Empanada System</h1>
             <p className="text-muted">Ingrese sus credenciales</p>
           </div>
 

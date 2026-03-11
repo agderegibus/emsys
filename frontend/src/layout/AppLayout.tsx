@@ -18,7 +18,7 @@ export default function AppLayout() {
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
             <i className="bi bi-shop me-2"></i>
-            Empanadas System
+            Empanada System
           </NavLink>
           <button
             className="navbar-toggler"

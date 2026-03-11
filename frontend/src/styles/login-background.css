@@ -1,0 +1,232 @@
+/* Reset body background when login page is shown */
+body.login-page,
+[data-theme="dark"] body.login-page,
+[data-theme="light"] body.login-page {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Animated gradient background for login page */
+.login-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  /* Colors set via inline style with random values */
+  animation: gradientShift 45s ease infinite;
+}
+
+/* Smooth gradient color shift animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Overlay with moving blurred shapes for depth */
+.login-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, rgba(0, 0, 0, 0.1) 0%, transparent 40%);
+  animation: overlayMove 60s ease-in-out infinite;
+}
+
+@keyframes overlayMove {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(5%) translateY(-5%);
+  }
+  50% {
+    transform: translateX(-5%) translateY(5%);
+  }
+  75% {
+    transform: translateX(3%) translateY(3%);
+  }
+}
+
+/* Floating blurred blobs for extra depth */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  mix-blend-mode: soft-light;
+  animation: float 20s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  top: -200px;
+  left: -200px;
+  animation-delay: 0s;
+  animation-duration: 50s;
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  top: 50%;
+  right: -150px;
+  animation-delay: -5s;
+  animation-duration: 60s;
+}
+
+.blob-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, transparent 70%);
+  bottom: -100px;
+  left: 30%;
+  animation-delay: -10s;
+  animation-duration: 55s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(100px, -80px) scale(1.1);
+  }
+  50% {
+    transform: translate(-50px, 100px) scale(0.95);
+  }
+  75% {
+    transform: translate(80px, 50px) scale(1.05);
+  }
+}
+
+/* Login card styling for glass effect */
+.login-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.login-card .card-body {
+  color: #ffffff;
+}
+
+.login-card h1 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.login-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.login-card .form-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.login-card .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.login-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.login-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.login-card .btn-primary {
+  background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+}
+
+.login-card .btn-primary:disabled {
+  background: linear-gradient(135deg, #666 0%, #888 100%);
+  transform: none;
+}
+
+.login-card .alert-danger {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #ff8a8a;
+}
+
+/* Logo animation */
+.login-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Ensure background animation works in both themes */
+[data-theme="dark"] .login-background,
+[data-theme="light"] .login-background,
+.login-background {
+  background-size: 400% 400% !important;
+}
+
+[data-theme="dark"] .login-card,
+[data-theme="light"] .login-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .login-card .form-control,
+[data-theme="light"] .login-card .form-control {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .login-card .form-control:focus,
+[data-theme="light"] .login-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
